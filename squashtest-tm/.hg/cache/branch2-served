@@ -1,0 +1,31 @@
+a554ec0c1144b225c49a856a57d87ea5decdf0df 8845
+c086432950f83317fed53b28c1ac078305e17c72 c custom-fields
+1ce893426b3a1b990d7794e02deef20c13c386bd o default
+9d046ff2c47825fce9fcb57fe64b607d5e1c4cff o default
+110e5f2642011366c506b1a886a437c53686d232 c dev-1107
+6f0d93835d493cd4fc140b289ec328661a323072 c dev-us-385
+5571c7ecb60a2353a2bff2469f92d0e6f472010d o evol-2269-import
+bbc4661fe5fc4e5654acfb9aa2d56406bde4aa3f c evol-3577-postgresql
+16c15b0e77a931272048b2f951381dad1c1d8425 c feat-3481-2-3
+4075469c117da0549508840a6b8d23a34a7ccaac o feature-1.8-mma
+0571256987ac6cb9d77ff58402936f9d61d1e64f c jira-plus-plus-target-151-160
+e140a54ec1538747779f4eefd1d44aa7c1ba3985 o maintenance-1.0.0.RELEASE
+e561a26faeb701e40eba9a4c517fb04dffdde8ac o maintenance-1.1.0.RELEASE
+32d4f48679b50633ad2cf992e36535639be53286 o maintenance-1.10
+1d2e866cfa7a10aa1ac375b1e37aa22bb431b528 o maintenance-1.11
+5b3f094d2ba7b083d90d215b8b33a34e3ebc27ea o maintenance-1.12
+a554ec0c1144b225c49a856a57d87ea5decdf0df o maintenance-1.13
+52c41de5987ff559c08242a7e13e38f0b8b85c1c o maintenance-1.2.0.RELEASE
+39e3bc0a1081c8e31c30c81d6b18ae5ec189c0da o maintenance-1.3.0.RELEASE
+41bf7d280063226778f36e1292b34bb41871e90c o maintenance-1.4.0.RELEASE
+1d78acedac14d64018d3b5a1c6560f6c581bb183 o maintenance-1.5.0.RELEASE
+6c3b77f5b6489c11afe577cc178a6aeb4b8d8941 o maintenance-1.6.0
+dfe9453b0cf27721d060e24c799c05347aa291a8 o maintenance-1.7.0.RELEASE
+8679af6dee2fe320d9e4d00a715820708da683b9 o maintenance-1.8
+9c6b9972565f6774e52f44ad73d7fbd7264e85e0 c maintenance-1.8-[Issue 3133]
+2ac152d8741b3deded21032aa12296e82db132b7 o maintenance-1.9
+4e2e91a87f7da89fa1977df31f206834f778bec9 o nosgi
+4c6a9169e90763292bd714e22c303b6ae6f4174d o release-1.2.1.RELEASE
+b0d1c0b93da3152c9117238e03adc5da4b3fc74d o test-advisor-friendly
+cdae20e6ae91ead9ed1a96aac3bfa876ac7f6851 c tm-1.5.0-domain-separation
+2e1474e2588bba9176424eb8f7113a942f907405 c upgrade to spring 3.1
