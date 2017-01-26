@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/classes" path="squashtest-tm/core/core.api/src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="squashtest-tm/core/core.bugtracker.api/src/main/java"/>
+	<classpathentry kind="src" path="squashtest-tm/core/core.dynamicmanager/src/main/java"/>
+	<classpathentry including="**/*.java" kind="src" output="target/test-classes" path="squashtest-tm/core/core.dynamicmanager/src/test/groovy">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="squashtest-tm/core/core.foundation/src/main/java"/>
+	<classpathentry kind="src" path="squashtest-tm/core/core.report.api/src/main/java"/>
+	<classpathentry kind="src" path="squashtest-tm/core/core.testautomation.api/src/main/java"/>
+	<classpathentry kind="src" path="squashtest-tm/core/core.wizard.api/src/main/java"/>
+	<classpathentry kind="src" path="squashtest-tm/core/launcher/src/main/java"/>
+	<classpathentry kind="src" path="squashtest-tm/database.h2.fragment/src/main/java"/>
+	<classpathentry excluding="**" kind="src" output="target/test-classes" path="squashtest-tm/integration-tests/src/it/groovy">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="squashtest-tm/plugins/plugin.bugtracker.mantis/src/main/java"/>
+	<classpathentry kind="src" path="squashtest-tm/plugins/plugin.report.std/src/main/java"/>
+	<classpathentry kind="src" path="squashtest-tm/plugins/plugin.testautomation.jenkins/src/main/java"/>
+	<classpathentry kind="src" path="squashtest-tm/plugins/plugin.workspacewizard.test/src/main/java"/>
+	<classpathentry kind="src" path="squashtest-tm/plugins/plugin.workspacewizard.test/src/test/java"/>
+	<classpathentry kind="src" path="squashtest-tm/tm/tm.domain/src/main/java"/>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="squashtest-tm/tm/tm.service/src/main/java">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/test-classes" path="squashtest-tm/tm/tm.service/src/test/groovy">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="squashtest-tm/tm/tm.web/src/main/java"/>
+	<classpathentry kind="src" path="squashtest-tm/tools/tools.annotation.processor/src/main/java"/>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

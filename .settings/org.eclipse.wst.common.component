@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="EquipeTest">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/squashtest-tm/core/core.api/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/squashtest-tm/core/core.bugtracker.api/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/squashtest-tm/core/core.dynamicmanager/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/squashtest-tm/core/core.foundation/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/squashtest-tm/core/core.report.api/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/squashtest-tm/core/core.testautomation.api/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/squashtest-tm/core/core.wizard.api/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/squashtest-tm/core/launcher/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/squashtest-tm/database.h2.fragment/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/squashtest-tm/plugins/plugin.bugtracker.mantis/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/squashtest-tm/plugins/plugin.report.std/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/squashtest-tm/plugins/plugin.testautomation.jenkins/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/squashtest-tm/plugins/plugin.workspacewizard.test/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/squashtest-tm/plugins/plugin.workspacewizard.test/src/test/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/squashtest-tm/tm/tm.domain/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/squashtest-tm/tm/tm.service/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/squashtest-tm/tm/tm.web/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/squashtest-tm/tools/tools.annotation.processor/src/main/java"/>
+        <property name="context-root" value="EquipeTest"/>
+        <property name="java-output-path" value="/EquipeTest/target/classes"/>
+    </wb-module>
+</project-modules>

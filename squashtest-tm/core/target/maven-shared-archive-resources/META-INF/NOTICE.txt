@@ -1,0 +1,9 @@
+   ===================================================================================
+   ==  NOTICE file containing copyright information,
+   ==  in this case for squashtest-csp-core.
+   ===================================================================================
+
+squashtest-csp-core
+Copyright (C) 2010-2017 Henix, henix.fr
+
+

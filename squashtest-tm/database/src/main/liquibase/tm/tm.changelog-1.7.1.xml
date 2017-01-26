@@ -1,26 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-
-        This file is part of the Squashtest platform.
-        Copyright (C) 2010 - 2016 Henix, henix.fr
-
-        See the NOTICE file distributed with this work for additional
-        information regarding copyright ownership.
-
-        This is free software: you can redistribute it and/or modify
-        it under the terms of the GNU Lesser General Public License as published by
-        the Free Software Foundation, either version 3 of the License, or
-        (at your option) any later version.
-
-        this software is distributed in the hope that it will be useful,
-        but WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        GNU Lesser General Public License for more details.
-
-        You should have received a copy of the GNU Lesser General Public License
-        along with this software.  If not, see <http://www.gnu.org/licenses/>.
-
--->
+<!-- This file is part of the Squashtest platform. Copyright (C) 2010 - 2016 
+	Henix, henix.fr See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. This is free software: you can 
+	redistribute it and/or modify it under the terms of the GNU Lesser General 
+	Public License as published by the Free Software Foundation, either version 
+	3 of the License, or (at your option) any later version. this software is 
+	distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+	PURPOSE. See the GNU Lesser General Public License for more details. You 
+	should have received a copy of the GNU Lesser General Public License along 
+	with this software. If not, see <http://www.gnu.org/licenses/>. -->
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
@@ -51,8 +40,10 @@
 		<comment>Store the ids of the ghost executions</comment>
 		<sql>
 			insert into ENTITIES_TO_DELETE (ENTITY_NAME, ENTITY_ID)
-			select distinct 'EXECUTION', E.EXECUTION_ID
-			from EXECUTION E left outer join ITEM_TEST_PLAN_EXECUTION ITPE
+			select
+			distinct 'EXECUTION', E.EXECUTION_ID
+			from EXECUTION E left outer join
+			ITEM_TEST_PLAN_EXECUTION ITPE
 			on E.EXECUTION_ID = ITPE.EXECUTION_ID
 			where ITPE.EXECUTION_ID is null;
 		</sql>
@@ -62,48 +53,59 @@
 		<sql>insert into ENTITIES_TO_DELETE (ENTITY_NAME, ENTITY_ID)
 			select
 			'EXECUTION_STEP', ES.EXECUTION_STEP_ID
-			from EXECUTION_STEP ES, EXECUTION_EXECUTION_STEPS EES, ENTITIES_TO_DELETE ETD
-			where ES.EXECUTION_STEP_ID = EES.EXECUTION_STEP_ID
-			and EES.EXECUTION_ID =	ETD.ENTITY_ID
+			from EXECUTION_STEP ES,
+			EXECUTION_EXECUTION_STEPS EES, ENTITIES_TO_DELETE ETD
+			where
+			ES.EXECUTION_STEP_ID = EES.EXECUTION_STEP_ID
+			and EES.EXECUTION_ID =
+			ETD.ENTITY_ID
 			and ETD.ENTITY_NAME = 'EXECUTION'
 			;
 		</sql>
-		
+
 	</changeSet>
 	<changeSet id="tm-1.7.1.issue-2873-04" author="mpagnon">
 		<comment>Store the ids of the issue lists to delete</comment>
 		<sql>
 			insert into ENTITIES_TO_DELETE (ENTITY_NAME, ENTITY_ID)
-			select 'ISSUE_LIST', E.ISSUE_LIST_ID
-			from EXECUTION E,  ENTITIES_TO_DELETE ETD
+			select
+			'ISSUE_LIST', E.ISSUE_LIST_ID
+			from EXECUTION E, ENTITIES_TO_DELETE ETD
 			where E.EXECUTION_ID = ETD.ENTITY_ID
-			and ETD.ENTITY_NAME = 'EXECUTION'			
+			and ETD.ENTITY_NAME = 'EXECUTION'
 		</sql>
 		<sql>
 			insert into ENTITIES_TO_DELETE (ENTITY_NAME, ENTITY_ID)
-			select 'ISSUE_LIST', ES.ISSUE_LIST_ID
-			from   EXECUTION_STEP ES,  ENTITIES_TO_DELETE ETD2
+			select
+			'ISSUE_LIST', ES.ISSUE_LIST_ID
+			from EXECUTION_STEP ES,
+			ENTITIES_TO_DELETE ETD2
 			where ES.EXECUTION_STEP_ID = ETD2.ENTITY_ID
-			and	ETD2.ENTITY_NAME = 'EXECUTION_STEP'
+			and ETD2.ENTITY_NAME = 'EXECUTION_STEP'
 			;
 		</sql>
 	</changeSet>
-	
+
 	<changeSet id="tm-1.7.1.issue-2873-05" author="mpagnon">
 		<comment>Store the ids of the issue lists to delete</comment>
 		<sql>
 			insert into ENTITIES_TO_DELETE (ENTITY_NAME, ENTITY_ID)
-			select 'ATTACHMENT_LIST', E.ATTACHMENT_LIST_ID
-			from EXECUTION E,  ENTITIES_TO_DELETE ETD
-			where  E.EXECUTION_ID = ETD.ENTITY_ID
-			and ETD.ENTITY_NAME = 'EXECUTION'			
+			select
+			'ATTACHMENT_LIST', E.ATTACHMENT_LIST_ID
+			from EXECUTION E,
+			ENTITIES_TO_DELETE ETD
+			where E.EXECUTION_ID = ETD.ENTITY_ID
+			and
+			ETD.ENTITY_NAME = 'EXECUTION'
 		</sql>
 		<sql>
 			insert into ENTITIES_TO_DELETE (ENTITY_NAME, ENTITY_ID)
-			select 'ATTACHMENT_LIST', ES.ATTACHMENT_LIST_ID
-			from  EXECUTION_STEP ES,  ENTITIES_TO_DELETE ETD2
-			where  ES.EXECUTION_STEP_ID = ETD2.ENTITY_ID
-			and	ETD2.ENTITY_NAME = 'EXECUTION_STEP'
+			select
+			'ATTACHMENT_LIST', ES.ATTACHMENT_LIST_ID
+			from EXECUTION_STEP ES,
+			ENTITIES_TO_DELETE ETD2
+			where ES.EXECUTION_STEP_ID = ETD2.ENTITY_ID
+			and ETD2.ENTITY_NAME = 'EXECUTION_STEP'
 			;
 		</sql>
 	</changeSet>
@@ -114,7 +116,8 @@
 				exists (
 				select 1
 				from ENTITIES_TO_DELETE
-				where ENTITY_NAME = 'ISSUE_LIST'
+				where ENTITY_NAME =
+				'ISSUE_LIST'
 				and ENTITY_ID = ISSUE_LIST_ID
 				);
 			</where>
@@ -124,11 +127,12 @@
 		<comment>DELETE Automated execution extender of executions to delete</comment>
 		<delete tableName="AUTOMATED_EXECUTION_EXTENDER">
 			<where>
-				 exists (
-				select	1 
+				exists (
+				select 1
 				from ENTITIES_TO_DELETE
 				where ENTITY_NAME = 'EXECUTION'
-				and ENTITY_ID = MASTER_EXECUTION_ID)
+				and ENTITY_ID =
+				MASTER_EXECUTION_ID)
 			</where>
 		</delete>
 	</changeSet>
@@ -136,10 +140,11 @@
 		<comment>DELETE automated suites that are not linked to any automated execution extender</comment>
 		<delete tableName="AUTOMATED_SUITE">
 			<where>
-				 not exists (
+				not exists (
 				select 1
 				from AUTOMATED_EXECUTION_EXTENDER
-				where AUTOMATED_SUITE.SUITE_ID = AUTOMATED_EXECUTION_EXTENDER.SUITE_ID)
+				where
+				AUTOMATED_SUITE.SUITE_ID = AUTOMATED_EXECUTION_EXTENDER.SUITE_ID)
 			</where>
 		</delete>
 
@@ -148,20 +153,22 @@
 		<comment>Delete execution steps of ghost executions</comment>
 		<delete tableName="EXECUTION_EXECUTION_STEPS">
 			<where>
-				 exists (
-				select 1 
+				exists (
+				select 1
 				from ENTITIES_TO_DELETE
 				where ENTITY_NAME = 'EXECUTION_STEP'
-				and ENTITY_ID = EXECUTION_STEP_ID)
+				and ENTITY_ID
+				= EXECUTION_STEP_ID)
 			</where>
 		</delete>
 		<delete tableName="EXECUTION_STEP">
 			<where>
-				 exists (
-				select 1 
+				exists (
+				select 1
 				from ENTITIES_TO_DELETE
 				where ENTITY_NAME = 'EXECUTION_STEP'
-				and EXECUTION_STEP_ID = ENTITY_ID)
+				and
+				EXECUTION_STEP_ID = ENTITY_ID)
 			</where>
 		</delete>
 	</changeSet>
@@ -169,11 +176,12 @@
 		<comment>Delete ghost executions</comment>
 		<delete tableName="EXECUTION">
 			<where>
-				 exists (
-				select 1 
+				exists (
+				select 1
 				from ENTITIES_TO_DELETE
 				where ENTITY_NAME = 'EXECUTION'
-				and EXECUTION_ID = ENTITY_ID)
+				and EXECUTION_ID =
+				ENTITY_ID)
 			</where>
 		</delete>
 	</changeSet>
@@ -181,29 +189,32 @@
 		<comment>DELETE Attachments of execution and execution steps to delete</comment>
 		<delete tableName="ATTACHMENT">
 			<where>
-				 exists (
+				exists (
 				select 1
 				from ENTITIES_TO_DELETE
-				where ENTITY_NAME = 'ATTACHMENT_LIST'
+				where ENTITY_NAME =
+				'ATTACHMENT_LIST'
 				and ENTITY_ID = ATTACHMENT_LIST_ID
 				);
 			</where>
 		</delete>
 		<delete tableName="ATTACHMENT_CONTENT">
 			<where>
-				 not exists (
+				not exists (
 				select 1
 				from ATTACHMENT
-				where CONTENT_ID = ATTACHMENT_CONTENT_ID
+				where CONTENT_ID =
+				ATTACHMENT_CONTENT_ID
 				);
 			</where>
 		</delete>
 		<delete tableName="ATTACHMENT_LIST">
 			<where>
-				 exists (
+				exists (
 				select 1
 				from ENTITIES_TO_DELETE
-				where ENTITY_NAME = 'ATTACHMENT_LIST'
+				where ENTITY_NAME =
+				'ATTACHMENT_LIST'
 				and ATTACHMENT_LIST_ID = ENTITY_ID
 				);
 			</where>
@@ -213,11 +224,12 @@
 		<comment>DELETE issue lists of executions and execution-steps to delete</comment>
 		<delete tableName="ISSUE_LIST">
 			<where>
-				 exists (
-				select 1 
+				exists (
+				select 1
 				from ENTITIES_TO_DELETE
 				where ENTITY_NAME ='ISSUE_LIST'
-				and ENTITY_ID = ISSUE_LIST_ID)
+				and ENTITY_ID =
+				ISSUE_LIST_ID)
 			</where>
 		</delete>
 	</changeSet>

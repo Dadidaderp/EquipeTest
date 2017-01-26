@@ -1,26 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-
-        This file is part of the Squashtest platform.
-        Copyright (C) 2010 - 2016 Henix, henix.fr
-
-        See the NOTICE file distributed with this work for additional
-        information regarding copyright ownership.
-
-        This is free software: you can redistribute it and/or modify
-        it under the terms of the GNU Lesser General Public License as published by
-        the Free Software Foundation, either version 3 of the License, or
-        (at your option) any later version.
-
-        this software is distributed in the hope that it will be useful,
-        but WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        GNU Lesser General Public License for more details.
-
-        You should have received a copy of the GNU Lesser General Public License
-        along with this software.  If not, see <http://www.gnu.org/licenses/>.
-
--->
+<!-- This file is part of the Squashtest platform. Copyright (C) 2010 - 2016 
+	Henix, henix.fr See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. This is free software: you can 
+	redistribute it and/or modify it under the terms of the GNU Lesser General 
+	Public License as published by the Free Software Foundation, either version 
+	3 of the License, or (at your option) any later version. this software is 
+	distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+	PURPOSE. See the GNU Lesser General Public License for more details. You 
+	should have received a copy of the GNU Lesser General Public License along 
+	with this software. If not, see <http://www.gnu.org/licenses/>. -->
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
@@ -256,7 +245,7 @@
 			create trigger ins_tcln_after after insert on
 			TEST_CASE_LIBRARY_NODE
 			for each row insert into
-			TCLN_RELATIONSHIP_CLOSURE values (new.tcln_id, new.tcln_id, 0);		
+			TCLN_RELATIONSHIP_CLOSURE values (new.tcln_id, new.tcln_id, 0);
 		</sql>
 
 
@@ -268,7 +257,7 @@
 			TEST_CASE_LIBRARY_NODE
 			for each row delete from
 			TCLN_RELATIONSHIP_CLOSURE where ancestor_id=old.tcln_id and
-			descendant_id=old.tcln_id;	
+			descendant_id=old.tcln_id;
 		</sql>
 
 
@@ -283,7 +272,7 @@
 			cross join TCLN_RELATIONSHIP_CLOSURE c2
 			where c1.descendant_id = new.ancestor_id
 			and c2.ancestor_id =
-			new.descendant_id;		
+			new.descendant_id;
 		</sql>
 
 
@@ -317,7 +306,7 @@
 			create trigger ins_rln_after after insert on
 			REQUIREMENT_LIBRARY_NODE
 			for each row insert into
-			RLN_RELATIONSHIP_CLOSURE values (new.rln_id, new.rln_id, 0);		
+			RLN_RELATIONSHIP_CLOSURE values (new.rln_id, new.rln_id, 0);
 		</sql>
 
 
@@ -329,7 +318,7 @@
 			REQUIREMENT_LIBRARY_NODE
 			for each row delete from
 			RLN_RELATIONSHIP_CLOSURE where ancestor_id=old.rln_id and
-			descendant_id=old.rln_id;	
+			descendant_id=old.rln_id;
 		</sql>
 
 
@@ -344,7 +333,7 @@
 			cross join RLN_RELATIONSHIP_CLOSURE c2
 			where c1.descendant_id = new.ancestor_id
 			and c2.ancestor_id =
-			new.descendant_id;		
+			new.descendant_id;
 		</sql>
 
 
@@ -352,17 +341,19 @@
 		<sql>
 			create trigger detach_rln_before before delete on
 			RLN_RELATIONSHIP
-			for each row delete clos1 
-            from RLN_RELATIONSHIP_CLOSURE clos1
-			
-            join RLN_RELATIONSHIP_CLOSURE clos2
-			on clos1.descendant_id=clos2.descendant_id
-			
-            left join RLN_RELATIONSHIP_CLOSURE clos3
-			on clos3.ancestor_id = clos2.ancestor_id
+			for each row delete clos1
+			from RLN_RELATIONSHIP_CLOSURE clos1
+
+			join RLN_RELATIONSHIP_CLOSURE clos2
+			on
+			clos1.descendant_id=clos2.descendant_id
+
+			left join RLN_RELATIONSHIP_CLOSURE clos3
+			on clos3.ancestor_id =
+			clos2.ancestor_id
 			and clos3.descendant_id = clos1.ancestor_id
-			
-            where clos2.ancestor_id = old.descendant_id
+
+			where clos2.ancestor_id = old.descendant_id
 			and clos3.ancestor_id is null;
 		</sql>
 	</changeSet>
@@ -377,7 +368,7 @@
 			create trigger ins_cln_after after insert on
 			CAMPAIGN_LIBRARY_NODE
 			for each row insert into
-			CLN_RELATIONSHIP_CLOSURE values (new.cln_id, new.cln_id, 0);		
+			CLN_RELATIONSHIP_CLOSURE values (new.cln_id, new.cln_id, 0);
 		</sql>
 
 
@@ -389,7 +380,7 @@
 			CAMPAIGN_LIBRARY_NODE
 			for each row delete from
 			CLN_RELATIONSHIP_CLOSURE where ancestor_id=old.cln_id and
-			descendant_id=old.cln_id;	
+			descendant_id=old.cln_id;
 		</sql>
 
 
@@ -403,7 +394,8 @@
 			CLN_RELATIONSHIP_CLOSURE c1
 			cross join CLN_RELATIONSHIP_CLOSURE c2
 			where c1.descendant_id = new.ancestor_id
-			and c2.ancestor_id = new.descendant_id;		
+			and c2.ancestor_id =
+			new.descendant_id;
 		</sql>
 
 
@@ -418,7 +410,8 @@
 			clos1.descendant_id=clos2.descendant_id
 			left join
 			CLN_RELATIONSHIP_CLOSURE clos3
-			on clos3.ancestor_id = clos2.ancestor_id
+			on clos3.ancestor_id =
+			clos2.ancestor_id
 			and clos3.descendant_id = clos1.ancestor_id
 			where
 			clos2.ancestor_id = old.descendant_id
@@ -487,7 +480,7 @@
 			create trigger ins_rln_after after insert on
 			REQUIREMENT_LIBRARY_NODE
 			for each row call
-			"org.squashtest.csp.h2.triggers.RLNAfterInsert";		
+			"org.squashtest.csp.h2.triggers.RLNAfterInsert";
 		</sql>
 
 
@@ -531,7 +524,7 @@
 			create trigger ins_cln_after after insert on
 			CAMPAIGN_LIBRARY_NODE
 			for each row call
-			"org.squashtest.csp.h2.triggers.CLNAfterInsert";		
+			"org.squashtest.csp.h2.triggers.CLNAfterInsert";
 		</sql>
 
 
@@ -565,265 +558,278 @@
 	</changeSet>
 
 	<!-- ************** /h2 triggers **************** -->
-  
-  
-  <!-- ************** postgresql triggers **************** -->
-<changeSet id="tm-1.3.0-feat-1112.05-postgresql" author="mpagnon"
-    dbms="postgresql">
-    <comment>postgresql-triggers for TCLN_RELATIONSHIP_CLOSURE table</comment>
-
-    <!-- after insertion of a tcl node : create auto reference in the closure table -->
-    <createProcedure>
-      drop trigger if exists ins_tcln_after on TEST_CASE_LIBRARY_NODE;
-      drop function if exists ins_tcln_after();
-      create function ins_tcln_after() returns trigger as $ins_tcln_after$
-      begin
-        insert into TCLN_RELATIONSHIP_CLOSURE
-        values (new.tcln_id, new.tcln_id, 0); 
-        return new;
-      end;
-      $ins_tcln_after$ language plpgsql;
-      
-      create trigger ins_tcln_after after insert on TEST_CASE_LIBRARY_NODE
-      for each row execute procedure ins_tcln_after();
-    
-    </createProcedure>
 
 
+	<!-- ************** postgresql triggers **************** -->
+	<changeSet id="tm-1.3.0-feat-1112.05-postgresql" author="mpagnon"
+		dbms="postgresql">
+		<comment>postgresql-triggers for TCLN_RELATIONSHIP_CLOSURE table</comment>
 
-    <!-- before suppression of a tcl node : remove auto reference from the closure table -->
-    <createProcedure>
-      drop trigger if exists del_tcln_before on TEST_CASE_LIBRARY_NODE;
-      drop function if exists del_tcln_before();
-      create function del_tcln_before() returns trigger as $del_tcln_before$
-      begin
-        delete from TCLN_RELATIONSHIP_CLOSURE 
-        where ancestor_id=old.tcln_id 
-        and descendant_id=old.tcln_id;  
-        return old;
-      end;
-      $del_tcln_before$ language plpgsql;
-      
-      create trigger del_tcln_before before delete on TEST_CASE_LIBRARY_NODE
-      for each row execute procedure del_tcln_before();
-          
-    </createProcedure>
+		<!-- after insertion of a tcl node : create auto reference in the closure 
+			table -->
+		<createProcedure>
+			drop trigger if exists ins_tcln_after on TEST_CASE_LIBRARY_NODE;
+			drop function if exists ins_tcln_after();
+			create function ins_tcln_after() returns trigger as $ins_tcln_after$
+			begin
+			insert into TCLN_RELATIONSHIP_CLOSURE
+			values (new.tcln_id, new.tcln_id, 0);
+			return new;
+			end;
+			$ins_tcln_after$ language plpgsql;
 
+			create trigger ins_tcln_after after insert on TEST_CASE_LIBRARY_NODE
+			for each row execute procedure ins_tcln_after();
 
-    <!-- when two tcl nodes are attached : attach the subtrees as well. -->
-    <createProcedure>
-      drop trigger if exists attach_tcln_after on TCLN_RELATIONSHIP;
-      drop function if exists attach_tcln_after();
-      create function attach_tcln_after() returns trigger as $attach_tcln_after$
-      begin
-        insert into TCLN_RELATIONSHIP_CLOSURE
-        select c1.ancestor_id, c2.descendant_id, c1.depth + c2.depth + 1
-        from TCLN_RELATIONSHIP_CLOSURE c1
-        cross join TCLN_RELATIONSHIP_CLOSURE c2
-        where c1.descendant_id = new.ancestor_id
-        and c2.ancestor_id = new.descendant_id;   
-        return new;
-      end;
-      $attach_tcln_after$ language plpgsql;
-      
-      create trigger attach_tcln_after after insert on TCLN_RELATIONSHIP
-      for each row execute procedure attach_tcln_after();
-    
-    </createProcedure>
-
-
-    <!-- when two tcl nodes are detached : detach the subtrees as well -->
-    <createProcedure>
-      drop trigger if exists detach_tcln_before on TCLN_RELATIONSHIP;
-      drop function if exists detach_tcln_before();
-      create function detach_tcln_before() returns trigger as $detach_tcln_before$
-      begin
-        delete from TCLN_RELATIONSHIP_CLOSURE 
-        where descendant_id in ( select descendant_id from TCLN_RELATIONSHIP_CLOSURE where ancestor_id = old.descendant_id )
-        and ancestor_id not in ( select descendant_id from TCLN_RELATIONSHIP_CLOSURE where ancestor_id = old.descendant_id )
-        ;
-        return old;
-      
-      end;
-      $detach_tcln_before$ language plpgsql;
-      
-      create trigger detach_tcln_before before delete on TCLN_RELATIONSHIP
-      for each row execute procedure detach_tcln_before();
-    
-    
-    </createProcedure>
-  </changeSet>
-
-
-  <changeSet id="tm-1.3.0-feat-1112.06-postgresql" author="mpagnon"
-    dbms="postgresql">
-    <comment>postgresql-triggers for RLN_RELATIONSHIP_CLOSURE table</comment>
-
-    <!-- after insertion of a rl node : create auto reference in the closure  table -->
-    <createProcedure>
-      drop trigger if exists ins_rln_after on REQUIREMENT_LIBRARY_NODE;
-      drop function if exists ins_rln_after();
-      create function ins_rln_after() returns trigger as $ins_rln_after$
-      begin
-        insert into RLN_RELATIONSHIP_CLOSURE 
-        values (new.rln_id, new.rln_id, 0);
-        return new;
-      end;
-      $ins_rln_after$ language plpgsql;
-      
-      create trigger ins_rln_after after insert on REQUIREMENT_LIBRARY_NODE
-      for each row execute procedure ins_rln_after();
-      
-    </createProcedure>
+		</createProcedure>
 
 
 
-    <!-- before suppression of a rl node : remove auto reference from the closure  table -->
-    <createProcedure>
-      drop trigger if exists del_rln_before on REQUIREMENT_LIBRARY_NODE;
-      drop function if exists del_rln_before();
-      create function del_rln_before() returns trigger as $del_rln_before$
-      begin
-        delete from RLN_RELATIONSHIP_CLOSURE 
-        where ancestor_id = old.rln_id 
-        and descendant_id = old.rln_id; 
-        return old;
-      end;
-      $del_rln_before$ language plpgsql;
-      
-      create trigger del_rln_before before delete on REQUIREMENT_LIBRARY_NODE
-      for each row execute procedure del_rln_before();
-    
-    </createProcedure>
+		<!-- before suppression of a tcl node : remove auto reference from the 
+			closure table -->
+		<createProcedure>
+			drop trigger if exists del_tcln_before on TEST_CASE_LIBRARY_NODE;
+			drop function if exists del_tcln_before();
+			create function del_tcln_before() returns trigger as $del_tcln_before$
+			begin
+			delete from TCLN_RELATIONSHIP_CLOSURE
+			where ancestor_id=old.tcln_id
+			and descendant_id=old.tcln_id;
+			return old;
+			end;
+			$del_tcln_before$ language plpgsql;
+
+			create trigger del_tcln_before before delete on TEST_CASE_LIBRARY_NODE
+			for each row execute procedure del_tcln_before();
+
+		</createProcedure>
 
 
-    <!-- when two rl nodes are attached : attach the subtrees as well. -->
-    <createProcedure>
-      drop trigger if exists attach_rln_after on RLN_RELATIONSHIP;
-      drop function if exists attach_rln_after();
-      create function attach_rln_after() returns trigger as $attach_rln_after$
-      begin
-        insert into RLN_RELATIONSHIP_CLOSURE
-        select c1.ancestor_id, c2.descendant_id, c1.depth + c2.depth + 1
-        from RLN_RELATIONSHIP_CLOSURE c1
-        cross join RLN_RELATIONSHIP_CLOSURE c2
-        where c1.descendant_id = new.ancestor_id
-        and c2.ancestor_id = new.descendant_id;
-        return new;
-      end;
-      $attach_rln_after$ language plpgsql;
-      
-      create trigger attach_rln_after after insert on RLN_RELATIONSHIP
-      for each row execute procedure attach_rln_after();
-      
-    </createProcedure>
+		<!-- when two tcl nodes are attached : attach the subtrees as well. -->
+		<createProcedure>
+			drop trigger if exists attach_tcln_after on TCLN_RELATIONSHIP;
+			drop function if exists attach_tcln_after();
+			create function attach_tcln_after() returns trigger as $attach_tcln_after$
+			begin
+			insert into TCLN_RELATIONSHIP_CLOSURE
+			select c1.ancestor_id, c2.descendant_id, c1.depth + c2.depth + 1
+			from TCLN_RELATIONSHIP_CLOSURE c1
+			cross join TCLN_RELATIONSHIP_CLOSURE c2
+			where c1.descendant_id = new.ancestor_id
+			and c2.ancestor_id = new.descendant_id;
+			return new;
+			end;
+			$attach_tcln_after$ language plpgsql;
+
+			create trigger attach_tcln_after after insert on TCLN_RELATIONSHIP
+			for each row execute procedure attach_tcln_after();
+
+		</createProcedure>
 
 
-    <!-- when two rl nodes are detached : detach the subtrees as well -->
-    <createProcedure>
-      drop trigger if exists detach_rln_before on RLN_RELATIONSHIP;
-      drop function if exists detach_rln_before();
-      create function detach_rln_before() returns trigger as $detach_rln_before$
-      begin
-      delete from RLN_RELATIONSHIP_CLOSURE 
-        where descendant_id in ( select descendant_id from RLN_RELATIONSHIP_CLOSURE where ancestor_id = old.descendant_id )
-        and ancestor_id not in ( select descendant_id from RLN_RELATIONSHIP_CLOSURE where ancestor_id = old.descendant_id )
-        ;
-        return old;
-      end;
-      $detach_rln_before$ language plpgsql;
-      
-      create trigger detach_rln_before before delete on RLN_RELATIONSHIP
-      for each row execute procedure detach_rln_before();
-    
-    </createProcedure>
-  </changeSet>
+		<!-- when two tcl nodes are detached : detach the subtrees as well -->
+		<createProcedure>
+			drop trigger if exists detach_tcln_before on TCLN_RELATIONSHIP;
+			drop function if exists detach_tcln_before();
+			create function detach_tcln_before() returns trigger as
+			$detach_tcln_before$
+			begin
+			delete from TCLN_RELATIONSHIP_CLOSURE
+			where descendant_id in ( select descendant_id from
+			TCLN_RELATIONSHIP_CLOSURE where ancestor_id = old.descendant_id )
+			and ancestor_id not in ( select descendant_id from
+			TCLN_RELATIONSHIP_CLOSURE where ancestor_id = old.descendant_id )
+			;
+			return old;
 
-  <changeSet id="tm-1.3.0-feat-1112.07-postgresql" author="mpagnon"
-    dbms="postgresql">
-    <comment>postgresql-triggers for CLN_RELATIONSHIP_CLOSURE table</comment>
+			end;
+			$detach_tcln_before$ language plpgsql;
 
-    <!-- after insertion of a cl node : create auto reference in the closure table -->
-    <createProcedure>
-      drop trigger if exists ins_cln_after on CAMPAIGN_LIBRARY_NODE;
-      drop function if exists ins_cln_after();
-      create function ins_cln_after() returns trigger as $ins_cln_after$
-      begin
-        insert into CLN_RELATIONSHIP_CLOSURE
-        values (new.cln_id, new.cln_id, 0);
-        return new;
-      end;
-      $ins_cln_after$ language plpgsql;
-      
-      create trigger ins_cln_after after insert on CAMPAIGN_LIBRARY_NODE
-      for each row execute procedure ins_cln_after();
-    
-    </createProcedure>
+			create trigger detach_tcln_before before delete on TCLN_RELATIONSHIP
+			for each row execute procedure detach_tcln_before();
 
 
-
-    <!-- before suppression of a cl node : remove auto reference from the closure table -->
-    <createProcedure>
-      drop trigger if exists del_cln_before on CAMPAIGN_LIBRARY_NODE;
-      drop function if exists del_cln_before();
-      create function del_cln_before() returns trigger as $del_cln_before$
-      begin
-        delete from CLN_RELATIONSHIP_CLOSURE 
-        where ancestor_id = old.cln_id 
-        and descendant_id = old.cln_id;
-        return old;
-      end;
-      $del_cln_before$ language plpgsql;
-      
-      create trigger del_cln_before before delete on CAMPAIGN_LIBRARY_NODE
-      for each row execute procedure del_cln_before();
-    
-    </createProcedure>
+		</createProcedure>
+	</changeSet>
 
 
-    <!-- when two rl nodes are attached : attach the subtrees as well. -->
-    <createProcedure>
-      drop trigger if exists attach_cln_after on CLN_RELATIONSHIP;
-       drop function if exists attach_cln_after();
-      create function attach_cln_after() returns trigger as $attach_cln_after$
-      begin
-        insert into CLN_RELATIONSHIP_CLOSURE
-        select c1.ancestor_id, c2.descendant_id, c1.depth + c2.depth + 1
-        from CLN_RELATIONSHIP_CLOSURE c1
-        cross join CLN_RELATIONSHIP_CLOSURE c2
-        where c1.descendant_id = new.ancestor_id
-        and c2.ancestor_id = new.descendant_id;
-        return new;
-      end;
-      $attach_cln_after$ language plpgsql;
-      
-      create trigger attach_cln_after after insert on CLN_RELATIONSHIP
-      for each row execute procedure attach_cln_after();
-    
-    </createProcedure>
+	<changeSet id="tm-1.3.0-feat-1112.06-postgresql" author="mpagnon"
+		dbms="postgresql">
+		<comment>postgresql-triggers for RLN_RELATIONSHIP_CLOSURE table</comment>
+
+		<!-- after insertion of a rl node : create auto reference in the closure 
+			table -->
+		<createProcedure>
+			drop trigger if exists ins_rln_after on REQUIREMENT_LIBRARY_NODE;
+			drop function if exists ins_rln_after();
+			create function ins_rln_after() returns trigger as $ins_rln_after$
+			begin
+			insert into RLN_RELATIONSHIP_CLOSURE
+			values (new.rln_id, new.rln_id, 0);
+			return new;
+			end;
+			$ins_rln_after$ language plpgsql;
+
+			create trigger ins_rln_after after insert on REQUIREMENT_LIBRARY_NODE
+			for each row execute procedure ins_rln_after();
+
+		</createProcedure>
 
 
-    <!-- when two cl nodes are detached : detach the subtrees as well -->
-    <createProcedure>
-      drop trigger if exists detach_cln_before on CLN_RELATIONSHIP;
-      drop function if exists detach_cln_before();
-      create function detach_cln_before() returns trigger as $detach_cln_before$
-      begin
-        delete from CLN_RELATIONSHIP_CLOSURE 
-        where descendant_id in ( select descendant_id from CLN_RELATIONSHIP_CLOSURE where ancestor_id = old.descendant_id )
-        and ancestor_id not in ( select descendant_id from CLN_RELATIONSHIP_CLOSURE where ancestor_id = old.descendant_id )
-        ;
-        return old;
-      end;
-      $detach_cln_before$ language plpgsql;
-      
-      create trigger detach_cln_before before delete on CLN_RELATIONSHIP
-      for each row execute procedure detach_cln_before();
-    
-    </createProcedure>
-  </changeSet>
 
-  <!-- ************** /postgresql triggers *************** -->
+		<!-- before suppression of a rl node : remove auto reference from the closure 
+			table -->
+		<createProcedure>
+			drop trigger if exists del_rln_before on REQUIREMENT_LIBRARY_NODE;
+			drop function if exists del_rln_before();
+			create function del_rln_before() returns trigger as $del_rln_before$
+			begin
+			delete from RLN_RELATIONSHIP_CLOSURE
+			where ancestor_id = old.rln_id
+			and descendant_id = old.rln_id;
+			return old;
+			end;
+			$del_rln_before$ language plpgsql;
+
+			create trigger del_rln_before before delete on REQUIREMENT_LIBRARY_NODE
+			for each row execute procedure del_rln_before();
+
+		</createProcedure>
+
+
+		<!-- when two rl nodes are attached : attach the subtrees as well. -->
+		<createProcedure>
+			drop trigger if exists attach_rln_after on RLN_RELATIONSHIP;
+			drop function if exists attach_rln_after();
+			create function attach_rln_after() returns trigger as $attach_rln_after$
+			begin
+			insert into RLN_RELATIONSHIP_CLOSURE
+			select c1.ancestor_id, c2.descendant_id, c1.depth + c2.depth + 1
+			from RLN_RELATIONSHIP_CLOSURE c1
+			cross join RLN_RELATIONSHIP_CLOSURE c2
+			where c1.descendant_id = new.ancestor_id
+			and c2.ancestor_id = new.descendant_id;
+			return new;
+			end;
+			$attach_rln_after$ language plpgsql;
+
+			create trigger attach_rln_after after insert on RLN_RELATIONSHIP
+			for each row execute procedure attach_rln_after();
+
+		</createProcedure>
+
+
+		<!-- when two rl nodes are detached : detach the subtrees as well -->
+		<createProcedure>
+			drop trigger if exists detach_rln_before on RLN_RELATIONSHIP;
+			drop function if exists detach_rln_before();
+			create function detach_rln_before() returns trigger as $detach_rln_before$
+			begin
+			delete from RLN_RELATIONSHIP_CLOSURE
+			where descendant_id in ( select descendant_id from
+			RLN_RELATIONSHIP_CLOSURE where ancestor_id = old.descendant_id )
+			and ancestor_id not in ( select descendant_id from
+			RLN_RELATIONSHIP_CLOSURE where ancestor_id = old.descendant_id )
+			;
+			return old;
+			end;
+			$detach_rln_before$ language plpgsql;
+
+			create trigger detach_rln_before before delete on RLN_RELATIONSHIP
+			for each row execute procedure detach_rln_before();
+
+		</createProcedure>
+	</changeSet>
+
+	<changeSet id="tm-1.3.0-feat-1112.07-postgresql" author="mpagnon"
+		dbms="postgresql">
+		<comment>postgresql-triggers for CLN_RELATIONSHIP_CLOSURE table</comment>
+
+		<!-- after insertion of a cl node : create auto reference in the closure 
+			table -->
+		<createProcedure>
+			drop trigger if exists ins_cln_after on CAMPAIGN_LIBRARY_NODE;
+			drop function if exists ins_cln_after();
+			create function ins_cln_after() returns trigger as $ins_cln_after$
+			begin
+			insert into CLN_RELATIONSHIP_CLOSURE
+			values (new.cln_id, new.cln_id, 0);
+			return new;
+			end;
+			$ins_cln_after$ language plpgsql;
+
+			create trigger ins_cln_after after insert on CAMPAIGN_LIBRARY_NODE
+			for each row execute procedure ins_cln_after();
+
+		</createProcedure>
+
+
+
+		<!-- before suppression of a cl node : remove auto reference from the closure 
+			table -->
+		<createProcedure>
+			drop trigger if exists del_cln_before on CAMPAIGN_LIBRARY_NODE;
+			drop function if exists del_cln_before();
+			create function del_cln_before() returns trigger as $del_cln_before$
+			begin
+			delete from CLN_RELATIONSHIP_CLOSURE
+			where ancestor_id = old.cln_id
+			and descendant_id = old.cln_id;
+			return old;
+			end;
+			$del_cln_before$ language plpgsql;
+
+			create trigger del_cln_before before delete on CAMPAIGN_LIBRARY_NODE
+			for each row execute procedure del_cln_before();
+
+		</createProcedure>
+
+
+		<!-- when two rl nodes are attached : attach the subtrees as well. -->
+		<createProcedure>
+			drop trigger if exists attach_cln_after on CLN_RELATIONSHIP;
+			drop function if exists attach_cln_after();
+			create function attach_cln_after() returns trigger as $attach_cln_after$
+			begin
+			insert into CLN_RELATIONSHIP_CLOSURE
+			select c1.ancestor_id, c2.descendant_id, c1.depth + c2.depth + 1
+			from CLN_RELATIONSHIP_CLOSURE c1
+			cross join CLN_RELATIONSHIP_CLOSURE c2
+			where c1.descendant_id = new.ancestor_id
+			and c2.ancestor_id = new.descendant_id;
+			return new;
+			end;
+			$attach_cln_after$ language plpgsql;
+
+			create trigger attach_cln_after after insert on CLN_RELATIONSHIP
+			for each row execute procedure attach_cln_after();
+
+		</createProcedure>
+
+
+		<!-- when two cl nodes are detached : detach the subtrees as well -->
+		<createProcedure>
+			drop trigger if exists detach_cln_before on CLN_RELATIONSHIP;
+			drop function if exists detach_cln_before();
+			create function detach_cln_before() returns trigger as $detach_cln_before$
+			begin
+			delete from CLN_RELATIONSHIP_CLOSURE
+			where descendant_id in ( select descendant_id from
+			CLN_RELATIONSHIP_CLOSURE where ancestor_id = old.descendant_id )
+			and ancestor_id not in ( select descendant_id from
+			CLN_RELATIONSHIP_CLOSURE where ancestor_id = old.descendant_id )
+			;
+			return old;
+			end;
+			$detach_cln_before$ language plpgsql;
+
+			create trigger detach_cln_before before delete on CLN_RELATIONSHIP
+			for each row execute procedure detach_cln_before();
+
+		</createProcedure>
+	</changeSet>
+
+	<!-- ************** /postgresql triggers *************** -->
 	<changeSet id="tm-1.3.0-feat-1112.08" author="bsiri">
 		<comment>this step is mandatory if we want the next one to work (triggers need the nodes to have self-reference in the closure tables)</comment>
 		<sql>
@@ -1037,7 +1043,7 @@
 
 			<column name="PROJECT_NAME" type="java.sql.Types.VARCHAR(255)"
 				remarks="project-name in the bugtracker" />
-				
+
 			<column name="PROJECT_ID" type="BIGINT">
 				<constraints nullable="false" foreignKeyName="FK_BUGTRACKER_BINDING_PROJECT"
 					references="PROJECT(PROJECT_ID)" />
@@ -1046,13 +1052,15 @@
 
 	</changeSet>
 
-	
+
 	<changeSet id="tm-1.3.0-feat-1194.04" author="mpagnon">
 		<comment>Data migration: add all bugtrackers that had an issue</comment>
 		<sql>insert into BUGTRACKER (NAME, KIND, URL, IFRAME_FRIENDLY)
-			select distinct issues.BT_NAME , 'mantis', 'TO BE DEFINED', true
-			from ISSUE issues;
-	</sql>
+			select
+			distinct issues.BT_NAME , 'mantis', 'TO BE DEFINED', true
+			from ISSUE
+			issues;
+		</sql>
 	</changeSet>
 	<changeSet id="tm-1.3.0-feat-1194.05" author="mpagnon">
 		<comment>New foreign key in ISSUE table that points to a BUGTRACKER</comment>
@@ -1072,7 +1080,8 @@
 			BTID BIGINT
 			);
 
-			Insert into ISSUEBT (ISSUEID, BTID)
+			Insert into
+			ISSUEBT (ISSUEID, BTID)
 			select distinct iss.ISSUE_ID,
 			bt.BUGTRACKER_ID
 			from ISSUE as iss, BUGTRACKER as bt
@@ -1080,8 +1089,8 @@
 
 			update ISSUE
 			set BUGTRACKER_ID = (
-				select BTID from ISSUEBT 
-				where ISSUEBT.ISSUEID = ISSUE.ISSUE_ID
+			select BTID from ISSUEBT
+			where ISSUEBT.ISSUEID = ISSUE.ISSUE_ID
 			);
 
 			DROP table ISSUEBT;
@@ -1120,7 +1129,7 @@
 		</createTable>
 
 		<addUniqueConstraint tableName="AUTOMATED_TEST"
-			columnNames="NAME, PROJECT_ID" constraintName="uni_auto_test"/>
+			columnNames="NAME, PROJECT_ID" constraintName="uni_auto_test" />
 
 	</changeSet>
 
@@ -1162,19 +1171,19 @@
 			A automated suite groups together a bunch of test automation executions, 
 			which themselves refer to test automation tests. 
 		 </comment>
-	
+
 		<createTable tableName="AUTOMATED_SUITE">
-			
-			<column name="SUITE_ID" type="java.sql.Types.VARCHAR(50)" >
-				<constraints primaryKey="true" nullable="false"/>
+
+			<column name="SUITE_ID" type="java.sql.Types.VARCHAR(50)">
+				<constraints primaryKey="true" nullable="false" />
 			</column>
 
-	
+
 		</createTable>
-	
+
 	</changeSet>
-	
-	<changeSet id="tm-1.3.0-feat-1211.02" author="bsiri" >
+
+	<changeSet id="tm-1.3.0-feat-1211.02" author="bsiri">
 		<comment>
 			Table for the automated executions extender. An automated execution is 
 			an extension to Executions that handles things related to test automation.
@@ -1183,41 +1192,48 @@
 			execution, thus inherited from it. Sadly Hibernates got in the way so we came
 			up with that solution instead. 
 		</comment>
-		
+
 		<createTable tableName="AUTOMATED_EXECUTION_EXTENDER">
-		
+
 			<column name="EXTENDER_ID" type="BIGINT" autoIncrement="true">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
-		
-		
-			<column name="MASTER_EXECUTION_ID" type="BIGINT" 
+
+
+			<column name="MASTER_EXECUTION_ID" type="BIGINT"
 				remarks="foreign key to the Execution it attaches to.">
-				
-				<constraints nullable="false" foreignKeyName="fk_auto_exec_exec" references="EXECUTION(EXECUTION_ID)"/>
-			
+
+				<constraints nullable="false" foreignKeyName="fk_auto_exec_exec"
+					references="EXECUTION(EXECUTION_ID)" />
+
 			</column>
-			
-			<column name="TEST_ID" type="BIGINT" remarks="we save that information as soon as the auto execution is created, 
+
+			<column name="TEST_ID" type="BIGINT"
+				remarks="we save that information as soon as the auto execution is created, 
 												because it may change in the future (even if the test case that this execution
 												is linked to stays otherwhise the same)">
-												
-				<constraints nullable="false" foreignKeyName="fk_auto_exec_auto_test" 
-				references="AUTOMATED_TEST(TEST_ID)"/>
-				
+
+				<constraints nullable="false" foreignKeyName="fk_auto_exec_auto_test"
+					references="AUTOMATED_TEST(TEST_ID)" />
+
 			</column>
-			
-			<column name="RESULT_URL" type="java.sql.Types.VARCHAR(300)" remarks="urls longer than 300 chars should go to hell"/>
-			
-			<column name="SUITE_ID" type="java.sql.Types.VARCHAR(50)" remarks="foreignkey of the suite this execution belongs to">
-				<constraints foreignKeyName="fk_auto_exec_suite" references="AUTOMATED_SUITE(SUITE_ID)"/>
+
+			<column name="RESULT_URL" type="java.sql.Types.VARCHAR(300)"
+				remarks="urls longer than 300 chars should go to hell" />
+
+			<column name="SUITE_ID" type="java.sql.Types.VARCHAR(50)"
+				remarks="foreignkey of the suite this execution belongs to">
+				<constraints foreignKeyName="fk_auto_exec_suite"
+					references="AUTOMATED_SUITE(SUITE_ID)" />
 			</column>
-			
-			<column name="RESULT_SUMMARY" remarks="a short debriefing of a test once it has been 
-						executed, for instance an error message" type="CLOB" defaultValue="null"/>
-		
+
+			<column name="RESULT_SUMMARY"
+				remarks="a short debriefing of a test once it has been 
+						executed, for instance an error message"
+				type="CLOB" defaultValue="null" />
+
 		</createTable>
-	
+
 	</changeSet>
 
 

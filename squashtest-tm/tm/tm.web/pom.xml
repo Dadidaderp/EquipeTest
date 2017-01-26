@@ -18,7 +18,7 @@
     <jasperreports.outputDir>${project.build.directory}/jasperreports-plugin/reports</jasperreports.outputDir>
 
     <!-- frontent plugin config - should speed up build in most common cases -->
-    <npm.skip>false</npm.skip>
+    <npm.skip>true</npm.skip>
 
     <provied.scope>provided</provied.scope>
 
